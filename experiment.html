@@ -6,6 +6,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Jenny's Portfolio</title>
     <link rel="icon" href="favicon.ico">
+    <style>
+        cool-custom-tag{
+            color: palevioletred;
+        }
+    </style>
+    <script>
+        class HelloWorld extends HTMLElement {
+            constructor() {
+              super();
+              console.log("Hello World!");
+            }
+          }
+          customElements.define('hello-world', HelloWorld);
+    </script>
 </head>
 
 <body>
@@ -31,9 +45,15 @@
     <main>
 
         <section id="experiment">
-            <h2>A Playground For HTML Tags</h2>
+            <h2>A Playground For HTML Tags</h2> 
 
-            <kbd>Ctrl + C</kbd>
+            <custom-tag>This is my custom tag</custom-tag> <br>
+
+            <cool-custom-tag>This custom tag will make the word become pink!</cool-custom-tag> <br>
+
+            <hello-world> Hello World Printing Tag</hello-world> <br>
+
+            <kbd>Ctrl + C</kbd> <br>
 
             <canvas id="myCanvas"></canvas>
             <script>
@@ -47,7 +67,7 @@
         </section>
     
     </main>
-    
+
     <search>
         <form>
           <input name="search-bar" id="search-bar" placeholder="Search something you interested to find about">
