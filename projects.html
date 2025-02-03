@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jenny's Portfolio</title>
+    <link rel="icon" href="favicon.ico">
+    <noscript>Your browser are currently not supporting Javascript. Some part of this website might be malfunction, please turn on Javascript through your website setting. </noscript>
+</head>
+
+<body>
+    <header>
+        <hgroup>
+            <h1>Hi, I'm Jenny Quach!</h1>
+            <h2>Welcome To My Personal Portfolio</h2>
+        </hgroup>
+        <search>
+            <form>
+              <input name="search-bar" id="search-bar" placeholder="Search something you interested to find about">
+            </form>
+        </search>
+        <p> You can access the link here to learn more about me!</p>
+        <nav>
+            <ul>
+                <li><a href="/about.html">About</a></li>
+                <li><a href="/experiences.html">Experiences</a></li>
+                <li><a href="/projects.html">Projects</a></li>
+                <li><a href="/connect.html">Connect</a></li>
+                <li><a href="/experiment.html">Experiment</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+
+        <section id="projects">
+            <h2>My Projects</h2>
+            <template id="project-template">
+                <h3><a href="" id="project-link"></a></h3>
+                <details>
+                  <summary>Read more about <span id="project-name"></span></summary>
+                  <p class="project-description"></p>
+                </details>
+                <pre><code>Tech Stack: </code></pre>
+            </template>
+
+            <h3><a href="https://github.com/viettech-group3/productify">Productify</a></h3>
+            <pre><code>Tech Stack:
+                Frontend: React.js, Material UI, Chakra UI Bootstrap
+                Backend: Node.js, Express.js
+                Database: MongoDB Atlas, Cloudinary
+                APIs: Google API, Dicebear API
+                Deployment: Render, Netlify </code></pre>
+            <details>
+                <summary>Read more about <em>Productify</em></summary>
+                <p>Your all-in-one solution for managing tasks, events, and collaboration while boosting your productivity and fostering a sense of achievement. Whether you're a student, an experienced professional, or anyone seeking a better way to stay organized, Productify has you covered. Productify is a collaborative productivity platform that incentivizes peers to create events on calendar, study together and hold the other accountable with leaderboard while earning redeemable points for unlocking avatars or create customer avatars.</p>
+            </details>
+            <video controls id="productify-vid" style="width: 700px;">
+                <source src="/static/productify-recording.mp4" type="video/mp4">
+            </video>
+            <p>You can visit the website <a href="https://productify-viettech.netlify.app">here</a> or see the page below</p>
+            <iframe src="https://productify-viettech.netlify.app"></iframe>
+        </section>
+        
+    </main>
+
+    <footer>
+        <hr> 
+        <p> Thank you so much for visiting my little website :></p>
+        <p>This page is created fully in HTML. <br><dfn>HTML:</dfn> A standard markup language for creating web pages.</p>
+    </footer>
+
+</body>
+</html>

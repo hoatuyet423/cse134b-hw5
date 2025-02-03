@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jenny's Portfolio</title>
+    <link rel="icon" href="favicon.ico">
+    <noscript>Your browser are currently not supporting Javascript. Some part of this website might be malfunction, please turn on Javascript through your website setting. </noscript>
+</head>
+
+<body>
+    <header>
+        <hgroup>
+            <h1>Hi, I'm Jenny Quach!</h1>
+            <h2>Welcome To My Personal Portfolio</h2>
+        </hgroup>
+        <search>
+            <form>
+              <input name="search-bar" id="search-bar" placeholder="Search something you interested to find about">
+            </form>
+        </search>
+        <p> You can access the link here to learn more about me!</p>
+        <nav>
+            <ul>
+                <li><a href="/about.html">About</a></li>
+                <li><a href="/experiences.html">Experiences</a></li>
+                <li><a href="/projects.html">Projects</a></li>
+                <li><a href="/connect.html">Connect</a></li>
+                <li><a href="/experiment.html">Experiment</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section id="contact">
+            <h2>Connect With Me</h2>
+            <h3>Some of my hobbies is:</h3>
+            <ol>
+                <li>Crochet</li>
+                <li>Movies including anime, kdrama, shows,...</li>
+                <li>Boardgame including catan, bang, three kingdom,...</li>
+            </ol>
+
+            <address>
+                Feel free to contact me at <a href="mailto:t1quach@ucsd.edu">t1quach@ucsd.edu</a> or submit through the form below
+            </address>
+            <form>
+                <fieldset>
+                    <legend>Connect:</legend>
+                    <label for="name">Name:</label>
+                    <input type="text" id="name" name="name"><br>
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" name="email"><br>
+                    <label for="message">Message:</label>
+                    <textarea id="message" name="message"></textarea><br>
+                    <label for="reason">Reason:</label>
+                    <select id="reason" name="reason">
+                        <optgroup label="Technical">
+                            <option value="industry">Industry Opportunities</option>
+                            <option value="research">Research Opportunities</option>
+                            <option value="projects">Projects/Opensource Opportunities</option>
+                        </optgroup>
+                        <optgroup label="Social">
+                            <option value="mentorship">Mentorship</option>
+                            <option value="coffee">Coffee Chat</option>
+                            <option value="hobbies">Hobbies</option>
+                        </optgroup>
+                    </select><br>
+                    <datalist id="meet-option">
+                        <option value="In person"></option>
+                        <option value="Zoom"></option>
+                    </datalist>
+                    <input list="meet-option">
+                    <button type="submit">Send</button>
+                </fieldset>
+            </form>
+
+            <aside>
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="https://github.com/hoatuyet423">GitHub</a></li>
+                    <li><a href="https://www.linkedin.com/in/jennyquach11/">LinkedIn</a></li>
+                </ul>
+            </aside>
+        </section>
+ 
+    </main>
+
+    <footer>
+        <hr> 
+        <p> Thank you so much for visiting my little website :></p>
+        <p>This page is created fully in HTML. <br><dfn>HTML:</dfn> A standard markup language for creating web pages.</p>
+    </footer>
+
+</body>
+</html>

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jenny's Portfolio</title>
+    <link rel="icon" href="favicon.ico">
+    <noscript>Your browser are currently not supporting Javascript. Some part of this website might be malfunction, please turn on Javascript through your website setting. </noscript>
+</head>
+
+<body>
+    <header>
+        <hgroup>
+            <h1>Hi, I'm Jenny Quach!</h1>
+            <h2>Welcome To My Personal Portfolio</h2>
+        </hgroup>
+        <search>
+            <form>
+              <input name="search-bar" id="search-bar" placeholder="Search something you interested to find about">
+            </form>
+        </search>
+        <p> You can access the link here to learn more about me!</p>
+        <nav>
+            <ul>
+                <li><a href="/about.html">About</a></li>
+                <li><a href="/experiences.html">Experiences</a></li>
+                <li><a href="/projects.html">Projects</a></li>
+                <li><a href="/connect.html">Connect</a></li>
+                <li><a href="/experiment.html">Experiment</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+
+        <section id="experiment">
+            <h2>A Playground For HTML Tags</h2>
+
+            <kbd>Ctrl + C</kbd>
+
+            <canvas id="myCanvas"></canvas>
+            <script>
+                var c = document.getElementById("myCanvas");
+                var ctx = c.getContext("2d");
+                ctx.beginPath();
+                ctx.arc(95, 50, 40, 0, 2 * Math.PI);
+                ctx.stroke();
+            </script>
+            
+        </section>
+    
+    </main>
+
+    <footer>
+        <hr> 
+        <p> Thank you so much for visiting my little website :></p>
+        <p>This page is created fully in HTML. <br><dfn>HTML:</dfn> A standard markup language for creating web pages.</p>
+    </footer>
+
+</body>
+</html>
