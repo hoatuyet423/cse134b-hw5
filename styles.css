@@ -1,0 +1,188 @@
+
+:root {
+    --main-bg-color: #F1DBDB;
+    --main-font-color: #333333;
+    --primary-color: #DEB5C0;
+    --highlight-color: #DB3A6C;
+  }
+  
+
+  @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap');
+  
+  body {
+    margin: 0;
+    padding: 0;
+    font-family: "Montserrat", "Helvetica Neue", Arial, sans-serif;
+    background-color: var(--main-bg-color, #ffffff);
+    color: var(--main-font-color, #000000);
+  }
+  
+
+  h1, h2, h3 {
+    margin: 0.5rem 0;
+    margin-bottom: 1rem;
+  }
+  p, li {
+    font-size: 1rem; 
+  }
+  
+  header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: var(--primary-color, #E4C2CC);
+    color: var(--main-font-color, #000000);
+    padding: 1rem;
+    padding-left: 3rem;
+    padding-right: 3rem;
+  }
+  
+  header h1 {
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+    transition: transform 0.3s; 
+  }
+  header h1:hover {
+    transform: scale(1.05); 
+  }
+  
+  header nav ul {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  
+  header nav ul li a {
+    color: var(--main-font-color, #000000);
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s;
+  }
+  header nav ul li a:hover {
+    color: var(--highlight-color, #ff00bb);
+    border: 1px solid #DE7E85;
+    padding: 0.5rem;
+    border-radius: 0.5rem;
+  }
+  
+  
+  main {
+    display: grid;
+    grid-template-columns: 1fr 1fr; 
+    gap: 1rem;
+    padding: 1.5rem;
+  }
+  
+  section {
+    min-height: 65dvh;
+    width: 45dvw;
+    background: #FFF7F5;
+    border-radius: 0.5rem;
+    padding: 1rem;
+    margin: 0.5rem;
+  }
+  section:has(img:hover) {
+    outline: 2px dashed #000000; 
+  }
+
+  video {
+    width: 40dvw;
+  }
+  picture {
+    width: 30dvw;
+  }
+  #me {
+    width: 30dvw;
+  }
+  
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+  blockquote {
+    animation: fadeIn 2s ease-in-out;
+    background-color: #5F1854;
+    color: #FDECFE;
+    padding: 1rem;
+    border-radius: 0.25rem;
+  }
+  #audio {
+    text-align: center;
+  }
+  
+  figure img, img {
+    width: 30dvw;
+    height: auto;
+    object-fit: cover;
+    object-position: center;
+  }
+
+  .rotateOnHover {
+    display: inline-block;
+    transition: transform 0.5s;
+  }
+  .rotateOnHover:hover {
+    transform: rotate(360deg);
+  }
+  
+
+  footer {
+    background-color: var(--primary-color, #E4C2CC);
+    color: var(--main-font-color, #000000);
+    padding: 1rem;
+    text-align: center;
+    position: relative; 
+  }
+  hr {
+    color: #B84068;  
+  }
+  
+
+  @media (max-width: 600px) {
+    header nav ul {
+      flex-direction: column;
+      align-items: center;
+    }
+    main {
+      grid-template-columns: 1fr; 
+    }
+    section {
+        width: 80dvw;
+        min-height: 80dvh; 
+    }
+    img, picture, video {
+        width: 80dvw;
+    }
+    pre {
+        align-content: flex-end;
+    }
+  }
+  
+
+  @media (min-width: 601px) and (max-width: 900px) {
+    main {
+      grid-template-columns: 1fr 1fr; 
+    }
+    section {
+        width: 70dvw;
+        min-height: 100dvh; 
+    }
+  }
+  
+
+  @media (min-width: 901px) {
+    main {
+      grid-template-columns: 2fr 1fr; 
+    }
+    section {
+        min-height: 73dvh; 
+    }
+    header {
+      flex-direction: row;
+      justify-content: space-between;
+    }
+  }
+  
