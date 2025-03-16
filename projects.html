@@ -1,75 +1,208 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Jenny's Portfolio</title>
-    <link rel="icon" href="favicon.ico">
-    <link rel="stylesheet" href="styles.css">
-</head>
-
-<body>
-    <noscript>Your browser are currently not supporting Javascript. Some part of this website might be malfunction (e.g. The switch theme button will not work), please turn on Javascript through your website setting. </noscript>
-    <header>
-        <hgroup>
-            <h1>Hi, I'm Jenny Quach!</h1>
-            <p>Welcome To My Personal Portfolio</p>
-        </hgroup>
-        <input type="checkbox" id="menu-toggle" />
-        <label for="menu-toggle" class="menu-icon">&#9776;</label>
-        <nav>
-            <ul>
-                <li><a href="/index.html">Home</a></li>
-                <li><a href="/about.html">About</a></li>
-                <li><a href="/experiences.html">Experiences</a></li>
-                <li><a href="/projects.html">Projects</a></li>
-                <li><a href="/connect.html">Connect</a></li>
-                <li><a href="/experiment.html">Experiment</a></li>
-                <li><button id="theme-toggle">Switch Theme</button></li>
-            </ul>
-        </nav>
-    </header>
-
-    <main>
-        <section id="projects">
-            <h2>My Projects</h2>
-            <template id="project-template">
-                <h3><a href="" id="project-link"></a></h3>
-                <details>
-                  <summary>Read more about <span id="project-name"></span></summary>
-                  <p class="project-description"></p>
-                </details>
-                <pre><code>Tech Stack: </code></pre>
-            </template>
-
-            <h3><a href="https://github.com/viettech-group3/productify">Productify</a></h3>
-            <div class="project-tech">
-                <pre><code>Tech Stack:
-    Frontend: React.js, Chakra UI Bootstrap
-    Backend: Node.js, Express.js
-    Database: MongoDB Atlas, Cloudinary
-    APIs: Google API, Dicebear API
-    Deployment: Render, Netlify </code></pre>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>Jenny's Portfolio</title>
+  <link rel="icon" href="favicon.ico">
+  <link rel="stylesheet" href="styles.css">
+  
+  <script>
+    class ProjectCard extends HTMLElement {
+        connectedCallback() {
+          const title       = this.getAttribute('title')        || 'Untitled Project';
+          const imgSrc      = this.getAttribute('img-src')      || 'placeholder.jpg';
+          const imgAlt      = this.getAttribute('img-alt')      || 'Project Image';
+          const description = this.getAttribute('description')  || 'No description.';
+          const linkHref    = this.getAttribute('link-href')    || '#';
+          const linkText    = this.getAttribute('link-text')    || 'Read More';
+  
+          this.innerHTML = `
+            <style>
+              project-card .card-wrapper {
+                min-height: 60dvh;
+                width: 45dvw;
+                background: var(--section--color, #ffffff);
+                border-radius: 0.5rem;
+                padding: 1rem;
+                margin: 0.5rem;
+              }
+              project-card .card-wrapper:hover {
+                outline: 2px dashed #000000;
+              }
+              project-card .card-title {
+                margin: 1rem 0;
+                font-size: 1.3rem;
+              }
+              project-card .card-description {
+                font-size: 1rem;
+                line-height: 1.4;
+              }
+              project-card .card-link {
+                text-decoration: underline;
+                color: inherit;
+              }
+            </style>
+  
+            <div class="card-wrapper">
+              <picture>
+                <img src="${imgSrc}" alt="${imgAlt}">
+              </picture>
+              <h2 class="card-title">${title}</h2>
+              <a class="card-link" href="${linkHref}" target="_blank" rel="noopener">
+                ${linkText}
+              </a>
+              <p class="card-description">${description}</p>
             </div>
-            <details>
-                <summary>Read more about <em>Productify</em></summary>
-                <p>Your all-in-one solution for managing tasks, events, and collaboration while boosting your productivity and fostering a sense of achievement. Whether you're a student, an experienced professional, or anyone seeking a better way to stay organized, Productify has you covered. Productify is a collaborative productivity platform that incentivizes peers to create events on calendar, study together and hold the other accountable with leaderboard while earning redeemable points for unlocking avatars or create customer avatars.</p>
-            </details>
-            <video controls id="productify-vid">
-                <source src="/static/productify-recording.mp4" type="video/mp4">
-            </video>
-            <p>You can visit the website <a href="https://productify-viettech.netlify.app">here</a> or see the page below</p>
-            <iframe src="https://productify-viettech.netlify.app"></iframe>
-        </section>
+          `;
+        }
+      }
+  
+      customElements.define('project-card', ProjectCard);
+  
+      function renderProjectCards(projectData) {
+        const container = document.getElementById('project-cards');
+        container.innerHTML = '';
+  
+        projectData.forEach(item => {
+          const cardElement = document.createElement('project-card');
+          cardElement.setAttribute('title',       item.title);
+          cardElement.setAttribute('img-src',     item.imgSrc);
+          cardElement.setAttribute('img-alt',     item.imgAlt);
+          cardElement.setAttribute('description', item.description);
+          cardElement.setAttribute('link-href',   item.linkHref);
+          cardElement.setAttribute('link-text',   item.linkText);
+          
+          container.appendChild(cardElement);
+        });
+      }
+  
+      function loadFromLocal() {
+        const dataLocal = localStorage.getItem('myProjects');
+        if (!dataLocal) {
+          alert('No local data found in localStorage. Please store data first!');
+          return;
+        }
+        const data = JSON.parse(dataLocal);
+        renderProjectCards(data);
+      }
+  
+      async function loadFromRemote() {
+        const url = 'https://api.jsonbin.io/v3/b/67d68b268561e97a50ecf68c'; 
         
-    </main>
+        try {
+          const response = await fetch(url);
+          if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+          }
+          const jsonData = await response.json();
+          const projectData = jsonData.record;
+          renderProjectCards(projectData);
+        } catch (error) {
+          console.error('Remote fetch error:', error);
+        }
+      }
 
-    <footer>
-        <p> Thank you so much for visiting my little website :></p>
-        <hr> 
-        <p>This page is created fully in HTML. <br><dfn>HTML:</dfn> A standard markup language for creating web pages.</p>
-    </footer>
-    <script src="dark-theme.js"></script>
+      window.addEventListener('DOMContentLoaded', () => {
+        const myLocalProjects = [
+        {
+            "title": "Productify",
+            "imgSrc": "static/productify-screenshot.png",
+            "imgAlt": "Screenshot of Productify project",
+            "description": "Productify is a versatile platform for managing tasks, events, and collaboration while fostering productivity and achievement. Its interactive calendar, timely email reminders, and dynamic leaderboard keep you organized and motivated. Engaging virtual study rooms and customizable avatars add a fun community element, making it ideal for students and professionals alike.",
+            "linkHref": "https://github.com/viettech-group3/productify",
+            "linkText": "GitHub Repo"
+        },
+        {
+            "title": "Tarot But Game",
+            "imgSrc": "static/tarot-screenshot.png",
+            "imgAlt": "Tarot Screenshot",
+            "description": "Welcome to Tarot, but Game repository! Tarot, but Game introduces a gameplay experience to getting tarot card fortunes! Our team created a Tarot card fortune telling web application that improves the user experience by making it more fun and interesting. You will be able to go on a journey where you can learn about tarot cards, choose your character, and meet a tarot fortune teller who will reveal your fortune.",
+            "linkHref": "https://github.com/CSE110-Team17/cse110-sp23-group17",
+            "linkText": "GitHub Repo"
+        },
+        {
+            "title": "UCSD Food Review",
+            "imgSrc": "static/food-screenshot.png",
+            "imgAlt": "Food Screenshot",
+            "description": "This iOS app empowers UCSD students to discover and rate on-campus dining halls along with their specific menu items. Users can share photos of their meals, post reviews, and vote on others’ feedback, making it easy to find the best dining options. With features like average ratings, food tags, and user profiles, the app fosters a sense of community by helping students make informed meal decisions. Over time, it could expand to include reviews of restaurants, study spaces, and hangout spots across the UCSD campus.",
+            "linkHref": "https://github.com/UCSDFoodReview/UCSDFoodReview",
+            "linkText": "GitHub Repo"
+        },
+        {
+            "title": "Human Detection Mask",
+            "imgSrc": "static/human-detect-how-to-use.png",
+            "imgAlt": "Screenshot of Human Detection project",
+            "description": "This wearable device is a smart face shield that alerts the user whenever someone enters their 8-foot radius, exceeding the CDC’s 6-foot guideline for extra caution. It uses an 8×8 pixelated thermal imaging sensor with a 9-foot measuring range and processes data via an Arduino Uno. A custom human detection algorithm triggers an LED flash to immediately warn the user, allowing more time to respond. By proactively maintaining a greater distance, the device helps reduce the risk of exposure in crowded environments.",
+            "linkHref": "https://github.com/mickjeon/human_detection_code",
+            "linkText": "GitHub Repo"
+        }
+        ];
+        localStorage.setItem('myProjects', JSON.stringify(myLocalProjects));
+
+
+        const btnLocal = document.getElementById('btn-load-local');
+        const btnRemote = document.getElementById('btn-load-remote');
+  
+        btnLocal.addEventListener('click', loadFromLocal);
+        btnRemote.addEventListener('click', loadFromRemote);
+      });
+
+  </script>
+</head>
+<body>
+  <noscript>
+    Your browser is currently not supporting Javascript. 
+    Some parts of this website might malfunction 
+    (e.g. The switch theme button). Please enable Javascript in your browser settings.
+  </noscript>
+
+  <header>
+    <hgroup>
+      <h1>Hi, I'm Jenny Quach!</h1>
+      <p>Welcome To My Personal Portfolio</p>
+    </hgroup>
+    <input type="checkbox" id="menu-toggle" />
+    <label for="menu-toggle" class="menu-icon">&#9776;</label>
+    <nav>
+      <ul>
+        <li><a href="/index.html">Home</a></li>
+        <li><a href="/about.html">About</a></li>
+        <li><a href="/experiences.html">Experiences</a></li>
+        <li><a href="/projects.html">Projects</a></li>
+        <li><a href="/connect.html">Connect</a></li>
+        <li><a href="/experiment.html">Experiment</a></li>
+        <li><button id="theme-toggle">Switch Theme</button></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <div id="projects">
+      <h2>My Projects</h2>
+
+      <div style="display: flex; align-items:center; justify-content:center">
+        <button id="btn-load-local" style="margin: 1rem;">Load Local</button>
+        <button id="btn-load-remote" style="margin: 1rem;">Load Remote</button>
+      </div>
+
+      <div id="project-cards" style="display:flex; flex-wrap: wrap; justify-content: center; gap: 2rem;">
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <p>Thank you so much for visiting my little website :></p>
+    <hr>
+    <p>This page is created fully in HTML.<br>
+       <dfn>HTML:</dfn> A standard markup language for creating web pages.
+    </p>
+  </footer>
+
+  <script src="dark-theme.js"></script>
 </body>
 </html>
+
+
+
+
