@@ -99,6 +99,15 @@
     outline: 2px dashed #000000; 
   }
 
+
+  section img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    border-radius: 0.5rem;
+}
+
   video {
     width: 40dvw;
   }
